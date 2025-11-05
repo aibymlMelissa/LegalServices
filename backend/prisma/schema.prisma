@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("LAWYER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  cases     Case[]
+  
+  @@map("users")
+}
+
+
+model Case {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  caseType    String
+  status      String      @default("DRAFT")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  services  Services[]
+  evidence    Evidence[]
+  
+  @@map("cases")
+}
+
+
+model Services {
+  id                String   @id @default(cuid())
+  title            String
+  legalDoctrine     String?  // MCP Module 1: Legal doctrine analysis (JSON as text)
+  legalProcedure    String?  // MCP Module 2: Legal procedure (JSON as text)
+  legalPrinciples   String?  // MCP Module 3: Legal principles (JSON as text)
+  admissibleEvidence String? // MCP Module 4: Admissible evidence (JSON as text)
+  casePrecedents    String?  // MCP Module 5: Similar case precedents (JSON as text)
+  clientPsychology  String?  // MCP Module 6: Client psychological status (JSON as text)
+  synthesizedServices String? // LLM-generated services synthesis (JSON as text)
+  presentationUrl   String?  // Generated PowerPoint file URL
+  
+  // Enhanced presentation fields
+  enhancedPresentationUrl String? // Gemini AI-enhanced PowerPoint file URL
+  enhancementRequest      String? // JSON containing enhancement parameters
+  googleSlidesUrl         String? // Google Slides presentation file URL
+  
+  // Professional feedback fields for iterative improvement
+  professionalFeedback String? // JSON containing feedback on each section
+  feedbackHistory   String?   // JSON array of previous feedback iterations
+  version           Int      @default(1) // Version number for services iterations
+  parentServicesId  String?  // Reference to previous version if this is a regeneration
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  
+  caseId            String
+  case              Case     @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  
+  @@map("services")
+}
+
+model Evidence {
+  id          String      @id @default(cuid())
+  title       String
+  description String?
+  evidenceType String
+  fileUrl     String?
+  metadata    String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  
+  caseId      String
+  case        Case        @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  
+  @@map("evidence")
+}
+
