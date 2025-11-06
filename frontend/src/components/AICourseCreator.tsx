@@ -977,7 +977,7 @@ export default function AICourseCreator() {
                         <InputLabel>Select Parameter File</InputLabel>
                         <Select
                           label="Select Parameter File"
-                          onChange={(e) => loadParametersFromFile(e.target.value)}
+                          onChange={(e) => loadParametersFromFile(e.target.value as string)}
                         >
                           {savedParameterFiles.map((file) => (
                             <MenuItem key={file} value={file}>
