@@ -184,7 +184,7 @@ export function DemoTour() {
         </Box>
         
         <Box mb={1}>
-          <LinearProgress variant="determinate" value={progress} size="small" />
+          <LinearProgress variant="determinate" value={progress} />
           <Typography variant="caption" color="textSecondary">
             Step {currentStep + 1} of {currentTourData.steps.length}
           </Typography>
