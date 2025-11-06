@@ -1166,7 +1166,7 @@ export default function AICourseCreator() {
                     <Button
                       variant="contained"
                       onClick={handleNext}
-                      disabled={!parameters.course_title || !parameters.teaching_objective || (validationResult && !validationResult.isValid)}
+                      disabled={!parameters.course_title || !parameters.teaching_objective || (validationResult ? !validationResult.isValid : false)}
                     >
                       Next: Upload Materials
                     </Button>
