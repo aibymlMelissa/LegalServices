@@ -1,0 +1,8 @@
+gradio
+langgraph
+typing
+python-dotenv
+#operator 
+langgraph.checkpoint.sqlite
+langchain-core
+Langchain-openai

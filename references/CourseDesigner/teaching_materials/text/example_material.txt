@@ -1,0 +1,23 @@
+# Sample Teaching Material
+
+## Introduction to Sustainable Development Goals
+
+The 17 Sustainable Development Goals (SDGs) were adopted by all United Nations Member States in 2015 as a universal call to action to end poverty, protect the planet, and ensure that all people enjoy peace and prosperity by 2030.
+
+## AI Integration in Business Services
+
+Artificial Intelligence is transforming business services by:
+1. Automating routine tasks
+2. Providing personalized customer experiences
+3. Enabling data-driven decision making
+4. Creating new service models
+
+## Self-Management Learning Techniques
+
+Self-management learning emphasizes personal responsibility for learning outcomes through:
+- Setting clear, achievable goals
+- Developing personalized learning strategies
+- Regular self-assessment and reflection
+- Adaptability to changing environments
+
+This example file demonstrates how the RAG system can reference existing materials.
