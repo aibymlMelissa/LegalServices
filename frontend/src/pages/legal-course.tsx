@@ -186,10 +186,10 @@ export default function LegalCoursePage() {
     try {
       if (isDemoMode && showDemo) {
         // Load demo courses
-        setSavedCourses(DEMO_COURSES);
+        setSavedCourses(DEMO_COURSES as any);
         // Load first demo course by default
         if (DEMO_COURSES.length > 0) {
-          setCourseData(DEMO_COURSES[0]);
+          setCourseData(DEMO_COURSES[0] as any);
         }
       } else if (isDemoMode && !showDemo) {
         // Hide demo data - show empty state
@@ -853,7 +853,7 @@ export default function LegalCoursePage() {
                                 fullWidth
                                 label="Add Objective"
                                 size="small"
-                                onKeyPress={(e) => {
+                                onKeyPress={(e: any) => {
                                   if (e.key === 'Enter' && e.target.value.trim()) {
                                     setCourseData(prev => ({
                                       ...prev,

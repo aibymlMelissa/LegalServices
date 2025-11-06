@@ -235,7 +235,7 @@ const Templates: React.FC = () => {
       
       // Open download link
       const downloadUrl = response.data.downloadUrl;
-      window.open(`${api.defaults.baseURL}${downloadUrl}`, '_blank');
+      window.open(`${(api as any).defaults.baseURL}${downloadUrl}`, '_blank');
       
       setSuccess('Template preview generated! Check your downloads.');
     } catch (err: any) {

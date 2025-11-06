@@ -80,14 +80,14 @@ export default function PresentationsPage() {
 
   // Get all strategies with presentations
   const strategiesWithPresentations = cases
-    .flatMap(case_ => 
-      (case_.strategies || []).map(services => ({ 
-        ...services, 
+    .flatMap((case_: any) =>
+      (case_.strategies || []).map((services: any) => ({
+        ...services,
         caseTitle: case_.title,
-        caseType: case_.caseType 
+        caseType: case_.caseType
       }))
     )
-    .filter(services => services.presentationUrl);
+    .filter((services: any) => services.presentationUrl);
 
   return (
     <Box>
