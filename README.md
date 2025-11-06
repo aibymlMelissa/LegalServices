@@ -1,107 +1,63 @@
-**A Case Law AI Assistant**
+# Legal Services Platform
 
-***Problem Statement (as presented to AI consultant):***
+**An AI-Powered Legal Strategy Assistant**
 
-**A practicing lawyer, who frequently works as both defense and prosecution counsel in a Common Law system, faces the recurring challenge of formulating and clearly presenting case strategies to clients. Each strategy must be grounded in:**
+A comprehensive legal technology platform that leverages AI to help lawyers formulate and present case strategies grounded in legal doctrine, procedure, principles, evidence, precedents, and client psychology.
 
-* **Legal doctrine**  
-* **Legal procedure**  
-* **Legal principles**  
-* **Admissible evidence**  
-* **Similar case precedents**  
-* **The psychological status of the client or accused**
+## Live Deployments
 
-**The lawyer needs to distill all of these elements into a concise PowerPoint presentation (≤10 slides) that precisely summarizes the chosen defense or prosecution tactics.**
+- **Frontend**: https://frontend-e3fsld24o-aibymls-projects.vercel.app
+- **Backend**: Deployed on Render (see deployment guide below)
+- **Repository**: https://github.com/aibymlMelissa/LegalServices
 
-**Proposed Solution Approach:**
+---
 
-**To address this need, the lawyer is seeking the development of a secure AI-powered platform with authentication and access control. The system would:**
+## Table of Contents
 
-* **Be structured around a Model Content Protocol (MCP), with each of the six legal components represented as independent modules.**  
-* **Initially, MCP modules can be placeholders, but in later iterations, they will integrate with specialized legal expert search models to gather and analyze relevant data.**  
-* **A Large Language Model (LLM) would act as a manager, synthesizing the outputs of each module into a coherent legal strategy.**  
-* **The final deliverable for the end-user would be a multimodal AI-assisted PowerPoint presentation, generated automatically from the assembled case strategy.**
+1. [Project Overview](#project-overview)
+2. [Architecture](#architecture)
+3. [Tech Stack](#tech-stack)
+4. [Getting Started](#getting-started)
+5. [Project Structure](#project-structure)
+6. [Development](#development)
+7. [Deployment](#deployment)
+8. [Environment Variables](#environment-variables)
+9. [API Documentation](#api-documentation)
+10. [Features](#features)
+11. [Troubleshooting](#troubleshooting)
 
-**Consultation Request:**
+---
 
-**The lawyer seeks guidance on the solution architecture in TypeScript. Specifically, whether the platform should adopt a frontend \+ backend separation (e.g., a React or Next.js frontend with a Node.js/Express backend), or whether a simpler, more integrated structure is preferable for their use case.**
+## Project Overview
 
-### 
+### Problem Statement
 
-### **Architectural Guidance for an AI-Powered Legal Strategy Platform**
+A practicing lawyer who frequently works as both defense and prosecution counsel in a Common Law system faces the recurring challenge of formulating and clearly presenting case strategies to clients. Each strategy must be grounded in:
 
-For a practicing lawyer seeking to develop a secure, AI-powered platform for generating case strategies, the choice between a separated frontend and backend architecture versus a more integrated structure is a critical early decision. This consultation provides guidance on selecting the most suitable TypeScript-based architecture, considering the unique requirements of the proposed legal tech solution.
+- **Legal doctrine**
+- **Legal procedure**
+- **Legal principles**
+- **Admissible evidence**
+- **Similar case precedents**
+- **The psychological status of the client or accused**
 
-**Project Synopsis:** The goal is to create a secure platform with authenticated access where a lawyer can input case details. The platform, structured around a Model Content Protocol (MCP), will leverage a Large Language Model (LLM) to synthesize information from six key legal modules—legal doctrine, procedure, principles, evidence, precedents, and client psychology. The final output will be an automatically generated PowerPoint presentation summarizing the defense or prosecution strategy.
+The lawyer needs to distill all of these elements into a concise PowerPoint presentation (≤10 slides) that precisely summarizes the chosen defense or prosecution tactics.
 
-#### **Architectural Options in a TypeScript Ecosystem**
+### Solution
 
-**1\. Separated Architecture: React Frontend with a Node.js Backend**
+This platform provides a secure AI-powered solution with authentication and access control. The system:
 
-In this model, the user interface (frontend) is a distinct application from the server-side logic (backend).
+- Is structured around a Model Content Protocol (MCP), with each of the six legal components represented as independent modules
+- Uses a Large Language Model (LLM) to synthesize outputs from each module into a coherent legal strategy
+- Generates multimodal AI-assisted PowerPoint presentations automatically from the assembled case strategy
 
-* **Frontend (Client-Side):** Built with a framework like React, this part of the application runs in the user's browser. It is responsible for rendering the user interface, capturing user input, and communicating with the backend via API calls.  
-* **Backend (Server-Side):** Developed with Node.js framework, this server would handle user authentication, manage the core logic of the MCP, interact with the LLM, process data from the six legal modules, and generate the final presentation file.
+---
 
-**2\. Integrated Architecture: A Full-Stack Next.js Application**
+## Architecture
 
-Next.js is a React framework that offers the capability to build full-stack applications within a single project structure.
+### Separated Frontend + Backend Architecture
 
-In this approach, both frontend and backend logic coexist in the same Next.js application. Pages are rendered on the server or client-side, and server-side logic is handled through features like API Routes.\[[1](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH1V1lFQkQilLwzDc-WSiBRAHiULdXPGRTY_YIeqxvCnba7BQvNJMBdC8NPLlJAWVqBQmv6_pv1qSe0R9FCo0Nl5FlRNqi7Oy7OE6kvToOeXFZ4XA9wu7UOejXKq3vFN_B90EHI2JLfEeZSexxPm0E7pCJR098b6Kr_hGkT)\] This allows for a more unified development experience.
-
-#### **Recommendation: A Separated Architecture for Future Scalability and Security**
-
-For this specific use case, a **separated frontend and backend architecture is the recommended approach**. While a more integrated structure might seem simpler initially, the nature of the platform's data processing, security requirements, and long-term vision for integrating specialized legal expert systems favor a decoupled design.
-
-#### **Rationale for a Separated Architecture**
-
-**Security and Access Control:**  
-A distinct backend allows for a more robust and isolated security model.\[[2](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFUTrkew1d-nGLEUH5PB6phSGe2o543W1pJ_EunKye8UPAegq81M5J9mHjBzu8RFoVRM5slxwW6oLiSXZza2d2cIDu4CvNuKxut3jgUBb4TimrPo-Xu85Sq9-Z1TKlSFCXVtx8fSn6OM9MwyQ917Qdj4CnXeUK0J2u1k64e2AS4Dxwgt5B_ywagBLLwx-Ght1vF_yVSLfrLILk=)\] The backend can act as a secure gatekeeper, handling all authentication and authorization logic before any sensitive data is processed or passed to the LLM. This separation is crucial when dealing with confidential client information. With a separated architecture, the frontend, which is more exposed, would have no direct access to databases or the core AI models.
-
-**Scalability and Future-Proofing:**  
-The lawyer's plan to initially use placeholders for the MCP modules and later integrate specialized legal expert search models is a key consideration.\[[3](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGKZxUd_rMB1xtNtx8PC2yDyIb3CZVyB-3SSI1ld1ZW30jCL0lRwTYnsw_4Imv7433SXdMDjFMkySYRBEWzVICh2UmjcTscKIEvNOsacys0Lo8ra9OQ4yWTYyR0gUyYHNFUEkzcpEG3ktzNVoBjML16kLVa2ooxwvdu6ZwCsQ0jJgZ_tDKvUq_RbiCgV6Z1)\]\[[4](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEU7hDUuIldCoLOWEAqbeqAB3Zwl_H1Q9v07ZXpyPkV2mdBSAT50ZnLfh_-qMEfsl_91Fw3HiH5fgpsyJW_O5-eBxaBU0m3ZNw9KMCh4bZB9nL9g7DRfBfR1eKy8LRq3rwfgYoAg9VqlnCmxoG1jQ1wICi_li-BvRlpPhA=)\] A separated backend provides the flexibility to develop and scale these data-intensive modules independently without affecting the user interface.\[[5](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQERDKG6udpDiM2l8ZMX-2JgSu1L52KJOpf75931JKznt2sF4BWqw7tJfvmC11KkGWlO6NnyjqQT3imf7HRWWP4PI3zNKi5DTcmVvF5zOJiljZi0VkpeKDc_LXU4sNE0xPF0sClh7M-lbPcQ7tpz3WitxJpqooPYB4Mr10uEitV-_1u1mTQAVjXWvv6dHaG_maR0lC4o-22JFz5ob7TyfIpy7Uo=)\] As the complexity of the AI and data analysis grows, the backend services can be scaled to handle the increased load without requiring a complete overhaul of the frontend application.\[[6](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHnnt3DjzaQo-CV90VDkOKqnlLrLeH5N_sfcemHChTxmBws2EQizXN0Qt_gQVo2ylgcjSA5PsQqt7oIM_53eu7Iaqgmw7rn5eI_AOC168ne9lLK6iqlzx7dpTNKctf6fExyAAKH0PE-PWfTrwgadHzuIq7qKsoU5SoYTOm-8_B9ZaYCYbBiFA==)\] This modularity aligns well with the proposed MCP structure.
-
-**Clear Separation of Concerns:**  
-A decoupled architecture enforces a clean separation between the user interface and the core legal strategy generation logic.\[[7](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF-8T61zbLVvB--ll5n-u8PxzPcKmypGAN5epP0d0l4Vm0Erhfu9F2WwhFhI3_egUnLequLOgvVzpqJs-xm0mN_ZvRDrWO4Ywh2mrnP2tiQ6R5TnTYXXryUxv9yzoowVPv56JxmUJdLl60k1vkQDmdKov99niEoYZ31S2EAZZo-aQImf5l3F2Hfc93L5sFAzrZog-ZysrstJ-UpR2uHr7Cihqc=)\] This makes the application easier to maintain, debug, and develop. A dedicated backend team can focus on the complex AI integrations and data processing pipelines, while a frontend team can concentrate on creating an intuitive and responsive user experience for the lawyer.\[[8](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSK2ukSvyJPuPWQ1S3Lc_wACQLe5Ttw0N88kvLcJajDd3isxTa2zwFms7KG2pZIK7j-0TRPGg0-bSxh1sX3NdW1C7QbN-023a-ntBguAycgg6jWJfQ8tFcCaUtmPCSZ5qXOaBwiCXNQmMLxpol2NceHWmUnwASVw9V8X51)\]
-
-**Technology Suitability:**
-
-* **Node.js/Express Backend:** Node.js is well-suited for building scalable, data-intensive applications and managing asynchronous operations, such as making calls to multiple AI models or legal databases.\[[9](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGPYe59f4rNnNJTg7Um6RZVL9Mpm2he5OTyuyCRuPTGyB8iGtyN1xvXvJstoIfsYUV43YnsiuD5vJzXwuvlytTwQy4wDnICttaj0CRLiM8K6v2TvnY7TWi33AJ2SeLJPFCq21uyU3UKjFuPFXrIIBpVA4jVRn7PrgoSyYIIkAPzS1I2W62Wn7I=)\] Its vast ecosystem of libraries can be leveraged for everything from interacting with the LLM to generating PowerPoint files.  
-* **React/Next.js Frontend:** React is a powerful library for building interactive user interfaces. Choosing Next.js for the frontend, even in a separated architecture, can offer benefits like server-side rendering (SSR) for faster initial page loads and improved SEO if parts of the platform were to become public-facing.\[[10](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEWboIBj5FS5SzSrvpG-DtKU8A7-QWRjmiKAPr_0qeMO1T23RL2Spu7bCzyPL-suQSG0VxQFGlPN-bWDT6qXcpMVsWYEYGN1TyC6P0vMHLaB49N4HNIhyVOLBs_u9g2NRqWotuMuebzqyxlYBU=)\]\[[11](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGbAuQNMzfCtcBYXsrrcPVlHTgDiEjS5depwEd1gB9AmX-wpLycuNfCGA0YlN63C70mJttCtXVBOBKV78_ngTU_erYObgKrr-47ln53LWk75v60gJzP8fzFZ_Zkm9FmzievHj7OQQ1482HNc7NKytJIDE6D1HMW2ak=)\]
-
-#### **Addressing the "Simpler, More Integrated Structure"**
-
-While a full-stack Next.js application offers a streamlined development workflow, it can become monolithic and harder to manage as the application's complexity grows. For a platform that will handle sensitive legal data and complex AI integrations, the initial simplicity of an integrated structure could lead to long-term challenges in scalability and security.
-
-A separated architecture, while requiring a bit more initial setup for API communication, provides a more robust and flexible foundation for the lawyer's ambitious and security-critical project. This approach will be better equipped to handle the planned evolution from placeholder modules to a sophisticated, multi-faceted legal analysis tool.
-
-Sources help
-
-1. [fullstackpathway.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH1V1lFQkQilLwzDc-WSiBRAHiULdXPGRTY_YIeqxvCnba7BQvNJMBdC8NPLlJAWVqBQmv6_pv1qSe0R9FCo0Nl5FlRNqi7Oy7OE6kvToOeXFZ4XA9wu7UOejXKq3vFN_B90EHI2JLfEeZSexxPm0E7pCJR098b6Kr_hGkT)  
-2. [medium.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQFUTrkew1d-nGLEUH5PB6phSGe2o543W1pJ_EunKye8UPAegq81M5J9mHjBzu8RFoVRM5slxwW6oLiSXZza2d2cIDu4CvNuKxut3jgUBb4TimrPo-Xu85Sq9-Z1TKlSFCXVtx8fSn6OM9MwyQ917Qdj4CnXeUK0J2u1k64e2AS4Dxwgt5B_ywagBLLwx-Ght1vF_yVSLfrLILk=)  
-3. [akamai.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGKZxUd_rMB1xtNtx8PC2yDyIb3CZVyB-3SSI1ld1ZW30jCL0lRwTYnsw_4Imv7433SXdMDjFMkySYRBEWzVICh2UmjcTscKIEvNOsacys0Lo8ra9OQ4yWTYyR0gUyYHNFUEkzcpEG3ktzNVoBjML16kLVa2ooxwvdu6ZwCsQ0jJgZ_tDKvUq_RbiCgV6Z1)  
-4. [konghq.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEU7hDUuIldCoLOWEAqbeqAB3Zwl_H1Q9v07ZXpyPkV2mdBSAT50ZnLfh_-qMEfsl_91Fw3HiH5fgpsyJW_O5-eBxaBU0m3ZNw9KMCh4bZB9nL9g7DRfBfR1eKy8LRq3rwfgYoAg9VqlnCmxoG1jQ1wICi_li-BvRlpPhA=)  
-5. [imensosoftware.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQERDKG6udpDiM2l8ZMX-2JgSu1L52KJOpf75931JKznt2sF4BWqw7tJfvmC11KkGWlO6NnyjqQT3imf7HRWWP4PI3zNKi5DTcmVvF5zOJiljZi0VkpeKDc_LXU4sNE0xPF0sClh7M-lbPcQ7tpz3WitxJpqooPYB4Mr10uEitV-_1u1mTQAVjXWvv6dHaG_maR0lC4o-22JFz5ob7TyfIpy7Uo=)  
-6. [dev.to](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHnnt3DjzaQo-CV90VDkOKqnlLrLeH5N_sfcemHChTxmBws2EQizXN0Qt_gQVo2ylgcjSA5PsQqt7oIM_53eu7Iaqgmw7rn5eI_AOC168ne9lLK6iqlzx7dpTNKctf6fExyAAKH0PE-PWfTrwgadHzuIq7qKsoU5SoYTOm-8_B9ZaYCYbBiFA==)  
-7. [stackoverflow.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQF-8T61zbLVvB--ll5n-u8PxzPcKmypGAN5epP0d0l4Vm0Erhfu9F2WwhFhI3_egUnLequLOgvVzpqJs-xm0mN_ZvRDrWO4Ywh2mrnP2tiQ6R5TnTYXXryUxv9yzoowVPv56JxmUJdLl60k1vkQDmdKov99niEoYZ31S2EAZZo-aQImf5l3F2Hfc93L5sFAzrZog-ZysrstJ-UpR2uHr7Cihqc=)  
-8. [github.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHSK2ukSvyJPuPWQ1S3Lc_wACQLe5Ttw0N88kvLcJajDd3isxTa2zwFms7KG2pZIK7j-0TRPGg0-bSxh1sX3NdW1C7QbN-023a-ntBguAycgg6jWJfQ8tFcCaUtmPCSZ5qXOaBwiCXNQmMLxpol2NceHWmUnwASVw9V8X51)  
-9. amplework.com  
-10. [uxpin.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEWboIBj5FS5SzSrvpG-DtKU8A7-QWRjmiKAPr_0qeMO1T23RL2Spu7bCzyPL-suQSG0VxQFGlPN-bWDT6qXcpMVsWYEYGN1TyC6P0vMHLaB49N4HNIhyVOLBs_u9g2NRqWotuMuebzqyxlYBU=)  
-11. [freecodecamp.org](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGbAuQNMzfCtcBYXsrrcPVlHTgDiEjS5depwEd1gB9AmX-wpLycuNfCGA0YlN63C70mJttCtXVBOBKV78_ngTU_erYObgKrr-47ln53LWk75v60gJzP8fzFZ_Zkm9FmzievHj7OQQ1482HNc7NKytJIDE6D1HMW2ak=)
-
-Of course. Here is a technical sheet to supplement the proposed solution architecture for the AI-powered legal strategy platform.
-
-***
-
-### **Technical Sheet: AI-Powered Legal Strategy Platform**
-
-This document outlines the technical specifications for the proposed AI-powered legal platform, detailing the recommended separated architecture using a TypeScript-centric stack.
-
-#### **1. Architectural Overview & Diagram**
-
-The recommended architecture is a decoupled client-server model. This separation enhances security by isolating the data-processing backend from the client-facing frontend and provides greater flexibility for future scaling.
-
-**Diagram:**
+The platform uses a **decoupled client-server model** for enhanced security, scalability, and maintainability:
 
 ```
 [ User (Lawyer) ]
@@ -109,84 +65,630 @@ The recommended architecture is a decoupled client-server model. This separation
       v
 [ Web Browser ]
       |
-      |--- [ Frontend Application (React / Next.js) ] --|
-      ^                                                  | (HTTPS / REST API)
-      | (UI/UX)                                          v
-      |                                              [ API Gateway / Load Balancer ]
-      |                                                  |
-      |--- [ Backend Application (Node.js / Express) ] --|
-            |
-            |--- [ 1. Authentication Middleware (JWT) ]
-            |--- [ 2. API Endpoints (Case Management, Strategy Generation) ]
-            |--- [ 3. AI Orchestration Service ] -> [ LLM API (e.g., Gemini, OpenAI) ]
-            |--- [ 4. PowerPoint Generation Service (pptxgenjs) ]
-            |--- [ 5. Database Interface (Prisma ORM) ] -> [ PostgreSQL Database ]
+      |--- [ Frontend (Next.js/React) ] ---|
+      ^                                     | (HTTPS/REST API)
+      | (UI/UX)                             v
+      |                              [ Backend (Node.js/Express) ]
+      |                                     |
+      |                                     |--- [ Authentication (JWT) ]
+      |                                     |--- [ API Endpoints ]
+      |                                     |--- [ AI Orchestration ] -> [ LLM APIs ]
+      |                                     |--- [ PowerPoint Generation ]
+      |                                     |--- [ Prisma ORM ] -> [ SQLite/PostgreSQL ]
+```
+
+### Why Separated Architecture?
+
+1. **Security**: Backend acts as secure gatekeeper for sensitive client data
+2. **Scalability**: Backend can scale independently as AI complexity grows
+3. **Separation of Concerns**: Clean boundaries between UI and business logic
+4. **Future-Proofing**: Easy to integrate specialized legal expert systems
+
+---
+
+## Tech Stack
+
+### Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Language**: TypeScript
+- **Database**: SQLite (dev), PostgreSQL (production)
+- **ORM**: Prisma
+- **Authentication**: JWT (JSON Web Tokens)
+- **AI Integration**: OpenAI, Google Gemini, Ollama
+- **Presentation Generation**: pptxgenjs
+- **Security**: Helmet.js, bcrypt
+
+### Frontend
+- **Framework**: Next.js 14 (React)
+- **Language**: TypeScript
+- **UI Library**: Material-UI (MUI)
+- **State Management**: React Context/Hooks
+- **API Client**: Axios
+- **Styling**: CSS-in-JS (MUI styled)
+
+### DevOps
+- **Version Control**: Git/GitHub
+- **Frontend Hosting**: Vercel
+- **Backend Hosting**: Render
+- **CI/CD**: Vercel & Render auto-deploy
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+ and npm
+- Git
+- OpenAI API key (optional: Gemini, Ollama)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/aibymlMelissa/LegalServices.git
+   cd LegalServices
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   cd backend && npm install
+   cd ../frontend && npm install
+   cd ..
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   # Backend environment
+   cd backend
+   cp .env.example .env
+   # Edit .env and add your API keys
+   ```
+
+4. **Initialize the database**
+   ```bash
+   cd backend
+   npx prisma generate
+   npx prisma migrate dev
+   ```
+
+5. **Run the development servers**
+   ```bash
+   # From root directory
+   npm run dev
+   ```
+
+   This will start:
+   - Backend on http://localhost:8080
+   - Frontend on http://localhost:3001
+
+---
+
+## Project Structure
+
+```
+LegalServices/
+├── backend/                    # Backend application
+│   ├── src/
+│   │   ├── controllers/       # Request handlers
+│   │   ├── routes/            # API routes
+│   │   ├── middleware/        # Auth, validation, etc.
+│   │   ├── services/          # Business logic
+│   │   ├── utils/             # Helper functions
+│   │   └── index.ts           # Entry point
+│   ├── prisma/
+│   │   └── schema.prisma      # Database schema
+│   ├── dist/                  # Compiled JavaScript
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── frontend/                   # Frontend application
+│   ├── src/
+│   │   ├── components/        # React components
+│   │   ├── pages/             # Next.js pages
+│   │   ├── services/          # API client
+│   │   ├── hooks/             # Custom hooks
+│   │   └── styles/            # Global styles
+│   ├── public/                # Static assets
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── render.yaml                # Render deployment config
+├── RENDER_DEPLOYMENT.md       # Deployment guide
+├── package.json               # Root package (unified scripts)
+└── README.md                  # This file
 ```
 
 ---
 
-#### **2. Backend Service Specifications (Node.js & Express)**
+## Development
 
-The backend is the system's core, responsible for all business logic, data processing, security, and AI integration. Node.js is ideal for managing the asynchronous nature of multiple AI model interactions.
+### Available Scripts
 
-| **Component** | **Technology** | **Rationale & Key Functions** |
-| :--- | :--- | :--- |
-| **Runtime Environment** | **Node.js** | Its non-blocking, event-driven architecture is highly efficient for I/O-heavy operations like API calls to the LLM and database queries. |
-| **Web Framework** | **Express.js** | A minimal, flexible, and robust framework for building the REST API. It provides powerful routing and middleware capabilities. |
-| **Language** | **TypeScript** | Enforces static typing, which improves code quality, reduces runtime errors, and enhances developer productivity, especially for a complex application. |
-| **Database ORM** | **Prisma** | A next-generation ORM for Node.js and TypeScript that offers full type-safety from the database schema to the application code, preventing entire classes of errors. It simplifies database interactions with an intuitive, human-readable schema. |
-| **Database System** | **PostgreSQL** | A powerful, open-source relational database known for its reliability, feature robustness, and performance. |
-| **Authentication** | **JSON Web Tokens (JWT)** | A stateless, token-based standard for securing the API. The flow involves the user logging in to receive a signed token, which is then sent in the `Authorization` header of subsequent requests. |
-| **AI Integration** | **LLM SDKs / REST APIs** | The backend will manage secure API calls to external Large Language Models (e.g., Google Gemini, OpenAI GPT series). It will securely store API keys and orchestrate the flow of data between the MCP modules and the LLM for synthesis. |
-| **Presentation Generation** | **`pptxgenjs`** | A powerful JavaScript library that can run on Node.js to programmatically create complex PowerPoint presentations. It will translate the structured JSON output from the LLM into slides, text, and other elements. |
-| **Security Middleware** | **Helmet.js** | Sets various HTTP headers to help protect the application from common web vulnerabilities. |
+From the **root directory**:
+
+```bash
+# Run both backend and frontend concurrently
+npm run dev
+
+# Run backend only
+npm run dev:backend
+
+# Run frontend only
+npm run dev:frontend
+
+# Build both applications
+npm run build
+
+# Run tests
+npm test
+```
+
+From **backend directory**:
+
+```bash
+# Start backend in development mode
+npm run dev
+
+# Build TypeScript
+npm run build
+
+# Start production server
+npm start
+
+# Generate Prisma client
+npx prisma generate
+
+# Run database migrations
+npx prisma migrate dev
+
+# Open Prisma Studio (database GUI)
+npx prisma studio
+```
+
+From **frontend directory**:
+
+```bash
+# Start Next.js dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
 
 ---
 
-#### **3. Frontend Application Specifications (React & Next.js)**
+## Deployment
 
-The frontend provides the lawyer with a secure and intuitive interface for managing cases and interacting with the AI.
+### Frontend Deployment (Vercel)
 
-| **Component** | **Technology** | **Rationale & Key Functions** |
-| :--- | :--- | :--- |
-| **Framework** | **Next.js (as a React framework)** | While the backend is separate, Next.js provides a best-in-class developer experience for building performant and scalable React applications. It offers features like an optimized build process and a structured project layout. |
-| **Language** | **TypeScript** | Ensures type safety for UI components, state management, and API data structures, reducing bugs. |
-| **UI Library** | **Material-UI (MUI) or Shadcn/ui** | A comprehensive component library to accelerate development and ensure a professional, consistent user interface. |
-| **API Communication** | **Axios** | A promise-based HTTP client for the browser and Node.js to handle communication with the backend REST API. |
-| **State Management** | **Redux Toolkit / Zustand** | For managing application-wide state, such as user authentication status and case data, in a predictable and scalable manner. |
+The frontend is already deployed to Vercel:
+
+**URL**: https://frontend-e3fsld24o-aibymls-projects.vercel.app
+
+#### To redeploy or update:
+
+1. **Push changes to GitHub**
+   ```bash
+   git add .
+   git commit -m "Your commit message"
+   git push
+   ```
+
+2. **Vercel auto-deploys** on every push to `main` branch
+
+3. **Environment Variables** (already configured in Vercel):
+   - `NEXT_PUBLIC_BACKEND_URL`: Points to Render backend URL
+
+### Backend Deployment (Render)
+
+The backend is deployed to Render using the `render.yaml` configuration.
+
+#### Initial Setup (First Time):
+
+1. **Sign up for Render**
+   - Go to https://render.com
+   - Sign up with GitHub account (aibymlMelissa)
+
+2. **Create New Web Service**
+   - Click "New +" → "Web Service"
+   - Connect repository: `aibymlMelissa/LegalServices`
+   - Render auto-detects `render.yaml`
+
+3. **Configure Environment Variables** in Render dashboard:
+
+   **Required**:
+   - `OPENAI_API_KEY`: Your OpenAI API key
+   - `FRONTEND_URL`: Your Vercel frontend URL
+
+   **Auto-generated by Render**:
+   - `JWT_SECRET`
+   - `JWT_REFRESH_SECRET`
+
+   **Optional**:
+   - `GEMINI_API_KEY`: Google Gemini API key
+   - `OLLAMA_BASE_URL`: Ollama server URL
+
+4. **Deploy**
+   - Click "Create Web Service"
+   - Render will automatically:
+     - Install dependencies
+     - Generate Prisma client
+     - Build TypeScript code
+     - Start the backend
+
+5. **Get Backend URL**
+   - After deployment: `https://legal-services-backend.onrender.com`
+   - Copy this URL
+
+6. **Update Vercel Frontend**
+   - Go to Vercel dashboard
+   - Settings → Environment Variables
+   - Update `NEXT_PUBLIC_BACKEND_URL` with Render URL
+   - Redeploy frontend
+
+#### Render Configuration
+
+See `render.yaml`:
+
+```yaml
+services:
+  - type: web
+    name: legal-services-backend
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: node dist/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_URL
+        value: file:./prod.db
+      # ... other env vars
+    healthCheckPath: /api/health
+```
+
+#### Important Notes:
+
+- **Free Tier**: Backend spins down after 15 minutes of inactivity
+- **Cold Starts**: First request after spin-down takes 30-60 seconds
+- **Database**: Using SQLite (`file:./prod.db`) - data persists on Render's disk
+- **Upgrade**: For always-on backend, upgrade to paid plan ($7/month)
+
+For detailed deployment instructions, see [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md)
 
 ---
 
-#### **4. API Protocol & Data Flow**
+## Environment Variables
 
-*   **Protocol**: A RESTful API will be exposed by the backend over **HTTPS** to ensure all data is encrypted in transit.
-*   **Data Format**: **JSON** will be used for all request and response bodies.
-*   **Key Workflow**:
-    1.  User authenticates via the frontend; the backend returns a JWT.
-    2.  Frontend stores the JWT and includes it in the header for all protected API calls.
-    3.  User submits case details to a backend endpoint (e.g., `/api/cases/{id}/strategy`).
-    4.  Backend validates the input and orchestrates calls to the LLM with prompts structured from the six MCP modules.
-    5.  The LLM returns a structured JSON object representing the synthesized legal strategy.
-    6.  The backend passes this JSON to the `pptxgenjs` service to generate a `.pptx` file buffer.
-    7.  The file buffer is sent back to the frontend, initiating a download for the user.
+### Backend (.env)
+
+```env
+# Server Configuration
+PORT=8080
+NODE_ENV=development
+
+# Frontend URL (for CORS)
+FRONTEND_URL=http://localhost:3001
+
+# Database
+DATABASE_URL="file:./dev.db"
+
+# Authentication
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+JWT_REFRESH_SECRET=your-super-secret-refresh-key-change-this-in-production
+
+# AI Services
+OPENAI_API_KEY=sk-your-openai-api-key-here
+GEMINI_API_KEY=your-gemini-api-key-here
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=llama3.2:90b
+
+# Logging
+LOG_LEVEL=info
+ENABLE_FILE_LOGGING=true
+```
+
+### Frontend (.env.local)
+
+```env
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080
+```
+
+### Production Environment Variables
+
+**Vercel** (Frontend):
+- `NEXT_PUBLIC_BACKEND_URL`: Render backend URL
+
+**Render** (Backend):
+- `OPENAI_API_KEY`: Your OpenAI API key
+- `FRONTEND_URL`: Vercel frontend URL
+- `JWT_SECRET`: Auto-generated
+- `JWT_REFRESH_SECRET`: Auto-generated
+- `NODE_ENV`: production
+- `PORT`: 10000
+- `DATABASE_URL`: file:./prod.db
 
 ---
 
-#### **5. Security & Confidentiality**
+## API Documentation
 
-Given the highly sensitive nature of legal data, security is paramount.
+### Base URL
 
-*   **Authentication & Authorization**: JWTs will manage user sessions. Future iterations can include Role-Based Access Control (RBAC) to differentiate access levels.
-*   **Data Encryption**: All communication will be encrypted via TLS (HTTPS). Data at rest (in the PostgreSQL database) will be encrypted.
-*   **Input Validation**: The backend will rigorously validate and sanitize all user input to prevent injection attacks and other common vulnerabilities.
-*   **Secret Management**: All sensitive credentials (API keys, database URIs, JWT secrets) will be managed via environment variables and stored securely in a vault for production environments (e.g., AWS Secrets Manager, HashiCorp Vault). They will never be hardcoded.
+- **Development**: `http://localhost:8080/api`
+- **Production**: `https://legal-services-backend.onrender.com/api`
+
+### Authentication
+
+All protected endpoints require a JWT token in the Authorization header:
+
+```
+Authorization: Bearer <token>
+```
+
+### Key Endpoints
+
+#### Authentication
+- `POST /api/auth/register` - Register new user
+- `POST /api/auth/login` - Login and get JWT
+- `POST /api/auth/refresh` - Refresh access token
+- `POST /api/auth/logout` - Logout
+
+#### Cases
+- `GET /api/cases` - List all cases
+- `POST /api/cases` - Create new case
+- `GET /api/cases/:id` - Get case details
+- `PUT /api/cases/:id` - Update case
+- `DELETE /api/cases/:id` - Delete case
+
+#### AI Strategy Generation
+- `POST /api/cases/:id/strategy` - Generate legal strategy
+- `POST /api/cases/:id/presentation` - Generate PowerPoint
+
+#### Health Check
+- `GET /api/health` - Server health status
+
+### Example API Call
+
+```javascript
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_BACKEND_URL + '/api',
+});
+
+// Login
+const response = await api.post('/auth/login', {
+  email: 'lawyer@example.com',
+  password: 'password123'
+});
+
+const token = response.data.token;
+
+// Get cases (with auth)
+const cases = await api.get('/cases', {
+  headers: {
+    Authorization: `Bearer ${token}`
+  }
+});
+```
 
 ---
 
-#### **6. Deployment & Scalability (DevOps)**
+## Features
 
-A modern DevOps approach will ensure reliability and maintainability.
+### Current Features
 
-*   **Containerization**: **Docker** will be used to containerize both the frontend and backend applications. This creates consistent and reproducible environments, simplifying development and deployment.
-*   **Continuous Integration/Deployment (CI/CD)**: A **GitHub Actions** or CircleCI pipeline will be established to automate testing, building Docker images, and deploying updates to a staging or production environment.
-*   **Hosting**: The containerized services can be deployed to any major cloud provider (e.g., AWS ECS, Google Cloud Run) for scalable and managed hosting. This allows the backend and frontend to be scaled independently as needed.
+✅ **User Authentication**
+- JWT-based authentication
+- Secure password hashing with bcrypt
+- Refresh token support
+- Role-based access control
+
+✅ **Case Management**
+- Create, read, update, delete cases
+- Store case details and client information
+- Track case status and progress
+
+✅ **AI-Powered Strategy Generation**
+- Integration with multiple LLM providers (OpenAI, Gemini, Ollama)
+- Structured prompts based on 6 legal components
+- JSON-formatted strategy output
+
+✅ **PowerPoint Generation**
+- Automated presentation creation
+- Customizable slide templates
+- Export to .pptx format
+
+✅ **Dashboard & Analytics**
+- System health monitoring
+- User activity tracking
+- Case statistics
+
+### Planned Features
+
+🔄 **Model Content Protocol (MCP) Modules**
+- Legal doctrine search
+- Procedure lookup
+- Principle analysis
+- Evidence validation
+- Precedent matching
+- Client psychology assessment
+
+🔄 **Advanced Features**
+- Collaborative editing
+- Document upload and analysis
+- Citation management
+- Case law database integration
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+#### 1. "npm run dev" fails
+
+**Problem**: Missing unified dev script
+
+**Solution**: Ensure you're in the root directory with the updated `package.json`:
+```bash
+npm install
+npm run dev
+```
+
+#### 2. Prisma client not initialized
+
+**Problem**: `@prisma/client did not initialize yet`
+
+**Solution**:
+```bash
+cd backend
+npx prisma generate
+npm run dev
+```
+
+#### 3. Missing OPENAI_API_KEY
+
+**Problem**: Backend starts with warning about missing API key
+
+**Solution**:
+- Add your OpenAI API key to `backend/.env`:
+  ```env
+  OPENAI_API_KEY=sk-your-actual-key-here
+  ```
+
+#### 4. CORS errors in development
+
+**Problem**: Frontend can't connect to backend
+
+**Solution**:
+- Ensure `FRONTEND_URL` in backend `.env` matches your frontend URL:
+  ```env
+  FRONTEND_URL=http://localhost:3001
+  ```
+
+#### 5. TypeScript compilation errors
+
+**Problem**: Build fails with type errors
+
+**Solution**:
+- We've relaxed strict mode in `frontend/tsconfig.json`
+- If errors persist, check specific files mentioned in error messages
+
+#### 6. Vercel deployment fails
+
+**Problem**: Build errors on Vercel
+
+**Solution**:
+- Check Vercel build logs
+- Ensure all environment variables are set
+- Verify `vercel.json` configuration
+
+#### 7. Render deployment fails
+
+**Problem**: Build or health check fails on Render
+
+**Solution**:
+- Check Render logs in dashboard
+- Verify `render.yaml` configuration
+- Ensure `/api/health` endpoint exists
+- Confirm all required environment variables are set
+
+#### 8. Cold starts on Render (Free Tier)
+
+**Problem**: First request takes 30-60 seconds
+
+**Solution**:
+- This is normal behavior on Render's free tier
+- Backend spins down after 15 minutes of inactivity
+- Consider upgrading to paid plan for always-on service
+
+#### 9. Database connection issues
+
+**Problem**: Prisma can't connect to database
+
+**Solution**:
+```bash
+# Development
+cd backend
+npx prisma migrate dev
+
+# Production (Render)
+# Ensure DATABASE_URL is set correctly in Render
+```
+
+### Getting Help
+
+- **Issues**: https://github.com/aibymlMelissa/LegalServices/issues
+- **Documentation**: This README and `RENDER_DEPLOYMENT.md`
+- **Logs**: Check Vercel and Render dashboards for deployment logs
+
+---
+
+## Development Workflow Summary
+
+### What We Accomplished
+
+1. ✅ **Set up unified development environment**
+   - Installed `concurrently` package
+   - Created unified `npm run dev` script
+   - Configured both backend and frontend to run simultaneously
+
+2. ✅ **Initialized database**
+   - Generated Prisma client
+   - Created SQLite database
+   - Set up database migrations
+
+3. ✅ **Configured environment variables**
+   - Created `.env` and `.env.example` files
+   - Documented all required variables
+   - Set up CORS and authentication secrets
+
+4. ✅ **Set up version control**
+   - Initialized Git repository
+   - Created comprehensive `.gitignore`
+   - Pushed to GitHub: https://github.com/aibymlMelissa/LegalServices
+
+5. ✅ **Deployed frontend to Vercel**
+   - Fixed 15+ TypeScript compilation errors
+   - Configured `vercel.json`
+   - Successfully deployed to: https://frontend-e3fsld24o-aibymls-projects.vercel.app
+
+6. ✅ **Set up backend deployment**
+   - Created `render.yaml` configuration
+   - Documented Render deployment process
+   - Prepared production environment
+
+7. ✅ **Created comprehensive documentation**
+   - This README.md
+   - RENDER_DEPLOYMENT.md deployment guide
+   - Inline code documentation
+
+---
+
+## License
+
+Private project for legal professional use.
+
+---
+
+## Contributors
+
+- AI Consultant: System architecture and implementation
+- Developer: Melissa (aibymlMelissa)
+
+---
+
+**Last Updated**: 2025-11-07
+
+For the most up-to-date deployment information, see [RENDER_DEPLOYMENT.md](./RENDER_DEPLOYMENT.md).
