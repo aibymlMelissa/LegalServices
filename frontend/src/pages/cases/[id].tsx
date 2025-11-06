@@ -377,15 +377,15 @@ export default function CaseDetailPage() {
                         {Array.isArray(value) ? (
                           <ul>
                             {value.map((item, index) => (
-                              <li key={index}>{typeof item === 'object' ? JSON.stringify(item) : item}</li>
+                              <li key={index}>{typeof item === 'object' ? JSON.stringify(item) : String(item)}</li>
                             ))}
                           </ul>
-                        ) : typeof value === 'object' ? (
+                        ) : typeof value === 'object' && value !== null ? (
                           <pre style={{ whiteSpace: 'pre-wrap', fontSize: '0.875rem' }}>
                             {JSON.stringify(value, null, 2)}
                           </pre>
                         ) : (
-                          value
+                          String(value || '')
                         )}
                       </Typography>
                     </Box>
@@ -1120,7 +1120,7 @@ export default function CaseDetailPage() {
                           sx={{
                             width: 16,
                             height: 16,
-                            backgroundColor: color,
+                            backgroundColor: color as string,
                             border: '1px solid #ccc',
                             borderRadius: 0.5
                           }}

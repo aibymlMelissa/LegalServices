@@ -22,7 +22,9 @@ export const useAuthStore = create<AuthState>()(
         id: 'demo-user-id',
         email: 'demo@lawyer.com',
         name: 'Demo Lawyer',
-        role: 'LAWYER'
+        role: 'LAWYER',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       },
       isLoading: false,
       error: null,

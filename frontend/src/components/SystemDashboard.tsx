@@ -263,7 +263,7 @@ export default function SystemDashboard() {
         overall: result.status,
         services: Object.entries(result.services || {}).map(([name, service]: [string, any]) => ({
           name,
-          status: service.status === 'up' ? 'healthy' : 'unhealthy',
+          status: (service.status === 'up' ? 'healthy' : 'unhealthy') as 'healthy' | 'unhealthy',
           responseTime: service.responseTime || 0,
           lastCheck: service.lastCheck || new Date().toISOString()
         })),
@@ -286,7 +286,7 @@ export default function SystemDashboard() {
         },
         dependencies: Object.entries(result.dependencies || {}).map(([name, dep]: [string, any]) => ({
           name,
-          status: dep.status === 'available' || dep.status === 'accessible' ? 'connected' : 'disconnected',
+          status: (dep.status === 'available' || dep.status === 'accessible' ? 'connected' : 'disconnected') as 'connected' | 'disconnected',
           version: dep.version || dep.model || 'unknown',
           lastCheck: dep.lastTestTime || dep.lastCheck || new Date().toISOString()
         }))

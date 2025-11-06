@@ -163,6 +163,11 @@ class ApiService {
     return response.data;
   }
 
+  async collaborativeRegeneration(servicesId: string, feedbackData: any): Promise<any> {
+    const response: AxiosResponse<any> = await this.api.post(`/api/services/${servicesId}/collaborative-regenerate`, feedbackData);
+    return response.data;
+  }
+
   // Course methods
   async getCourses(): Promise<any[]> {
     const response: AxiosResponse<any[]> = await this.api.get('/api/courses');
@@ -197,6 +202,23 @@ class ApiService {
       },
     });
     return response.data;
+  }
+
+  // Generic HTTP methods
+  async get<T = any>(url: string, config?: any): Promise<AxiosResponse<T>> {
+    return await this.api.get<T>(url, config);
+  }
+
+  async post<T = any>(url: string, data?: any, config?: any): Promise<AxiosResponse<T>> {
+    return await this.api.post<T>(url, data, config);
+  }
+
+  async put<T = any>(url: string, data?: any, config?: any): Promise<AxiosResponse<T>> {
+    return await this.api.put<T>(url, data, config);
+  }
+
+  async delete<T = any>(url: string, config?: any): Promise<AxiosResponse<T>> {
+    return await this.api.delete<T>(url, config);
   }
 
   // Utility method to check if user is authenticated
